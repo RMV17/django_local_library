@@ -31,7 +31,7 @@ class Genre(models.Model):
             ),
         ]
 
-    class Book(models.Model):
+class Book(models.Model):
     """Model representing a book (but not a specific copy of a book)."""
     title = models.CharField(max_length=200)
     author = models.ForeignKey('Author', on_delete=models.RESTRICT, null=True)
@@ -41,9 +41,9 @@ class Genre(models.Model):
     summary = models.TextField(
         max_length=1000, help_text="Enter a brief description of the book")
     isbn = models.CharField('ISBN', max_length=13,
-                            unique=True,
-                            help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn'
-                                      '">ISBN number</a>')
+                        unique=True,
+                        help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn'
+                                    '">ISBN number</a>')
 
     # ManyToManyField used because genre can contain many books. Books can cover many genres.
     # Genre class has already been defined so we can specify the object above.
@@ -58,7 +58,7 @@ class Genre(models.Model):
         """Returns the URL to access a detail record for this book."""
         return reverse('book-detail', args=[str(self.id)])
     
-    import uuid # Required for unique book instances
+import uuid # Required for unique book instances
 
 class BookInstance(models.Model):
 
@@ -91,7 +91,7 @@ class BookInstance(models.Model):
         """String for representing the Model object."""
         return f'{self.id} ({self.book.title})'
     
-    class Author(models.Model):
+class Author(models.Model):
     """Model representing an author."""
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
